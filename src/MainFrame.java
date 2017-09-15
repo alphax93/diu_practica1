@@ -1,3 +1,7 @@
+
+import java.util.Arrays;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -131,48 +135,47 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        try{
-            float change = Float.valueOf(jTextField1.getText());
-            try{
-                float currency = Float.valueOf(jTextField2.getText());
-                jTextField3.setText(String.valueOf(change*currency));
-            }catch(NumberFormatException e){
-                jTextField2.setText("0");
-            }
-        }catch(NumberFormatException e){
-            jTextField1.setText("1");
-            try{
-                float currency = Float.valueOf(jTextField2.getText());
-            }catch(NumberFormatException e1){
-                jTextField2.setText("0");
-            }
+        float change = check(jTextField1);
+        if(change!=-1){
+            float currency = check(jTextField2);
+            if(currency !=-1)jTextField3.setText(String.format("%.2f",change*currency));
         }
-        
-        
-        
+        check(jTextField2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
         
-        try{
-            float change = Float.valueOf(jTextField1.getText());
-            try{
-                float currency = Float.valueOf(jTextField3.getText());
-                jTextField2.setText(String.valueOf(currency/change));
-            }catch(NumberFormatException e){
-                jTextField3.setText("0");
-            }
-        }catch(NumberFormatException e){
-            jTextField1.setText("1");
-            try{
-                float currency = Float.valueOf(jTextField3.getText());
-            }catch(NumberFormatException e1){
-                jTextField3.setText("0");
-            }
+        float change = check(jTextField1);
+        if(change!=-1){
+            float currency = check(jTextField3);
+            if(currency !=-1)jTextField2.setText(String.format("%.2f",change*currency));
         }
+        check(jTextField3);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    private float check(JTextField textField){
+        String text = textField.getText();
+        if(checkDecimals(text)){
+            try{
+                return Float.valueOf(text);
+            }catch(NumberFormatException e){
+                textField.setText("Error");
+                return -1;
+            }   
+        }else {
+            textField.setText("Solo dos decimales");
+            return -1;
+        }
+    }
+    
+    private boolean checkDecimals(String s){
+        String[] num = s.split("\\.");
+        if(num.length > 1){
+            if(num.length>2||num[1].length()>2 )return false;
+        }
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
