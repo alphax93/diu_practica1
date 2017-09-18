@@ -135,23 +135,36 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        float change = check(jTextField1);
+        float change = check(modify(jTextField1));
         if(change!=-1){
-            float currency = check(jTextField2);
+            float currency = check(modify(jTextField2));
             if(currency !=-1)jTextField3.setText(String.format("%.2f",change*currency));
         }
-        check(jTextField2);
+        check(modify(jTextField2));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        float change = check(jTextField1);
+        float change = check(modify(jTextField1));
         if(change!=-1){
-            float currency = check(jTextField3);
+            float currency = check(modify(jTextField3));
             if(currency !=-1)jTextField2.setText(String.format("%.2f",change*currency));
         }
-        check(jTextField3);
+        check(modify(jTextField3));
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private JTextField modify(JTextField textField){
+        String change = textField.getText();
+        String text= new String();
+        for(int i =0;i<change.length();i++){
+            if(change.charAt(i) == ','){
+                text=text+".";
+            }else{
+                text=text+change.charAt(i);
+            }
+        }
+        return new JTextField(text);
+    }
     
     private float check(JTextField textField){
         String text = textField.getText();
