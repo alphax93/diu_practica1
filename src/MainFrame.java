@@ -156,6 +156,9 @@ public class MainFrame extends javax.swing.JFrame {
     private JTextField modify(JTextField textField){
         String change = textField.getText();
         String text= new String();
+        if(change.length()<= 0){
+        return new JTextField(0);
+        }
         for(int i =0;i<change.length();i++){
             if(change.charAt(i) == ','){
                 text=text+".";
