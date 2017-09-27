@@ -148,7 +148,7 @@ public class MainFrame extends javax.swing.JFrame {
         float change = check(jTextField1);
         if(change!=-1){
             float currency = check(jTextField3);
-            if(currency !=-1)jTextField2.setText((String.format("%.2f",change*currency)).replace(',','.'));
+            if(currency !=-1)jTextField2.setText((String.format("%.2f",currency/change)).replace(',','.'));
         }
         check(jTextField3);
     }//GEN-LAST:event_jButton2ActionPerformed
